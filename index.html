@@ -7,70 +7,49 @@
     <style>
         body { margin:0; background:#111; color:white; font-family:Arial,sans-serif; }
         header { text-align:center; padding:30px; background:black; border-bottom:3px solid gold; }
-        header h1 { color:gold; }
-        nav { text-align:center; padding:15px; background:#1a1a1a; }
-        nav a { color:white; margin:15px; text-decoration:none; font-weight:bold; }
-        nav a:hover { color:red; }
-        section { padding:40px 20px; }
-        .hero { text-align:center; }
-        .hero h2 { color:gold; }
-        .order-box { max-width:700px; margin:auto; background:#1a1a1a; padding:25px; border-radius:10px; border:2px solid gold; }
-        input, select, textarea { width:100%; padding:12px; margin-top:5px; margin-bottom:15px; border:none; border-radius:6px; box-sizing: border-box; }
-        button { background:red; color:white; border:none; padding:12px 20px; font-size:16px; border-radius:6px; cursor:pointer; width: 100%; }
-        button:hover { opacity:0.9; }
-        #success { display:none; margin-top:20px; padding:15px; background:#145214; border-radius:6px; text-align: center; }
-        footer { margin-top:50px; text-align:center; padding:20px; background:black; border-top:3px solid gold; }
+        h1 { color:gold; }
+        .order-box { max-width:700px; margin:40px auto; background:#1a1a1a; padding:25px; border-radius:10px; border:2px solid gold; }
+        input, select, textarea { width:100%; padding:12px; margin:5px 0 15px 0; border:none; border-radius:6px; box-sizing:border-box; }
+        button { background:red; color:white; border:none; padding:15px; width:100%; font-size:16px; border-radius:6px; cursor:pointer; }
+        #success { display:none; margin-top:20px; padding:15px; background:#145214; border-radius:6px; text-align:center; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>2JZ Company</h1>
-    <p style="color:gold;">Kingsman • 2JZ Garage • 2JZ Gunshop</p>
 </header>
 
-<nav>
-    <a href="#rendeles">Rendelés</a>
-</nav>
-
-<section id="rendeles">
-    <div class="order-box">
-        <h2>Rendelés</h2>
-        <label>Frakció</label>
-        <select id="frakcio" onchange="termekekBetoltese()">
-            <option value="">Válassz</option>
-            <option value="2JZ Garage">2JZ Garage</option>
-            <option value="2JZ Gunshop">2JZ Gunshop</option>
-            <option value="Kingsman">Kingsman</option>
-        </select>
-
-        <label>Termék / Szolgáltatás</label>
-        <select id="termek"><option>Először válassz frakciót</option></select>
-
-        <label>IC Telefonszám</label>
-        <input type="text" id="telefon" placeholder="555-1234">
-
-        <label>Elérhetőség</label>
-        <input type="text" id="elerhetoseg" placeholder="Discord név">
-
-        <label>Megjegyzés</label>
-        <textarea id="megjegyzes" rows="5"></textarea>
-
-        <button id="sendBtn" onclick="kuldes()">Rendelés elküldése</button>
-        <div id="success">A megrendelést rögzítettük. Hamarosan felvesszük Önnel a kapcsolatot.</div>
-    </div>
+<section class="order-box">
+    <h2>Rendelés</h2>
+    <label>Frakció</label>
+    <select id="frakcio" onchange="termekekBetoltese()">
+        <option value="">Válassz</option>
+        <option value="2JZ Garage">2JZ Garage</option>
+        <option value="2JZ Gunshop">2JZ Gunshop</option>
+        <option value="Kingsman">Kingsman</option>
+    </select>
+    <label>Termék</label>
+    <select id="termek"><option>Először válassz frakciót</option></select>
+    <label>IC Telefonszám</label>
+    <input type="text" id="telefon">
+    <label>Elérhetőség</label>
+    <input type="text" id="elerhetoseg">
+    <label>Megjegyzés</label>
+    <textarea id="megjegyzes" rows="3"></textarea>
+    <button id="sendBtn" onclick="kuldes()">Rendelés elküldése</button>
+    <div id="success">A megrendelést rögzítettük.</div>
 </section>
 
 <script>
     function termekekBetoltese() {
-        const frakcio = document.getElementById("frakcio").value;
-        const termek = document.getElementById("termek");
-        termek.innerHTML = "";
-        let lista = [];
-        if(frakcio === "2JZ Garage") lista = ["Nitro", "Szerelőláda"];
-        else if(frakcio === "2JZ Gunshop") lista = ["Vízipisztoly", "Nerf MK2", "Nerf HFAP", "Nerf Vector", "Nerf PSR"];
-        else if(frakcio === "Kingsman") lista = ["Egyéni megbízás"];
-        lista.forEach(item => { let op = document.createElement("option"); op.text = item; termek.add(op); });
+        const f = document.getElementById("frakcio").value;
+        const t = document.getElementById("termek");
+        t.innerHTML = "";
+        let lista = f === "2JZ Garage" ? ["Nitro", "Szerelőláda"] : 
+                    f === "2JZ Gunshop" ? ["Vízipisztoly", "Nerf MK2", "Nerf HFAP", "Nerf Vector", "Nerf PSR"] : 
+                    f === "Kingsman" ? ["Egyéni megbízás"] : [];
+        lista.forEach(item => { let o = document.createElement("option"); o.text = item; t.add(o); });
     }
 
     async function kuldes() {
@@ -82,12 +61,9 @@
             elerhetoseg: document.getElementById("elerhetoseg").value,
             megjegyzes: document.getElementById("megjegyzes").value
         };
-
-        if (!adat.frakcio) { alert("Kérlek válassz frakciót!"); return; }
-
+        if (!adat.frakcio) { alert("Válassz frakciót!"); return; }
         btn.disabled = true;
-        btn.innerText = "Küldés folyamatban...";
-
+        btn.innerText = "Küldés...";
         try {
             await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
                 method: "POST",
@@ -96,8 +72,8 @@
             });
             document.getElementById("success").style.display = "block";
             btn.style.display = "none";
-        } catch (error) {
-            alert("Hiba történt a küldés során!");
+        } catch (e) {
+            alert("Hiba történt!");
             btn.disabled = false;
             btn.innerText = "Rendelés elküldése";
         }
