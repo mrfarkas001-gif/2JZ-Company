@@ -56,3 +56,26 @@
 </script>
 </body>
 </html>
+<script>
+    async function kuldes() {
+        const btn = document.getElementById('btn');
+        const formData = {
+            frakcio: document.getElementById("frakcio").value,
+            termek: document.getElementById("termek").value,
+            telefon: document.getElementsByName("telefon")[0].value,
+            elerhetoseg: document.getElementsByName("elerhetoseg")[0].value,
+            megjegyzes: document.getElementsByName("megjegyzes")[0].value
+        };
+
+        try {
+            const response = await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
+                method: "POST",
+                body: JSON.stringify(formData)
+            });
+            alert("Sikeresen elküldve!");
+            location.reload();
+        } catch (e) {
+            alert("Hiba történt!");
+        }
+    }
+</script>
