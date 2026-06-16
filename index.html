@@ -1,21 +1,20 @@
-<script>
-    async function kuldes() {
-        const data = {
-            frakcio: document.getElementById("frakcio").value,
-            termek: document.getElementById("termek").value,
-            telefon: document.getElementsByName("telefon")[0].value,
-            elerhetoseg: document.getElementsByName("elerhetoseg")[0].value,
-            megjegyzes: document.getElementsByName("megjegyzes")[0].value
-        };
+<form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+    
+    <label>Frakció:</label>
+    <select name="frakcio" required>
+        <option value="2JZ Garage">2JZ Garage</option>
+        <option value="2JZ Gunshop">2JZ Gunshop</option>
+        <option value="Kingsman">Kingsman</option>
+    </select>
 
-        // Itt a kulcs: JSON-t küldünk, és a content-type 'application/json'
-        await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-        
-        alert("Rendelés sikeresen elküldve!");
-        location.reload();
-    }
-</script>
+    <label>Telefonszám:</label>
+    <input type="text" name="telefon" required>
+
+    <label>Discord név:</label>
+    <input type="text" name="elerhetoseg" required>
+
+    <label>Megrendelés részletei:</label>
+    <textarea name="megrendeles" required></textarea>
+
+    <button type="submit">Küldés a 2JZ-nek</button>
+</form>
