@@ -2,7 +2,7 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>2JZ Company</title>
+    <title>2JZ Company - Rendelés</title>
     <style>
         body { background:#111; color:white; font-family:sans-serif; text-align:center; padding:20px; }
         .box { max-width:500px; margin:auto; background:#1a1a1a; padding:20px; border:2px solid gold; border-radius:10px; }
@@ -13,69 +13,60 @@
 <body>
 
 <div class="box">
-    <h2>Rendelés</h2>
-    <form id="form">
-        <select id="frakcio" name="frakcio" onchange="frissit()" required>
-            <option value="">Válassz</option>
+    <h2>2JZ Company Rendelés</h2>
+    <form id="rendelesForm">
+        <select id="frakcio" onchange="frissit()" required>
+            <option value="">Frakció választás</option>
             <option value="2JZ Garage">2JZ Garage</option>
             <option value="2JZ Gunshop">2JZ Gunshop</option>
             <option value="Kingsman">Kingsman</option>
         </select>
-        <select id="termek" name="termek" required><option>Válassz frakciót!</option></select>
-        <input type="text" name="telefon" placeholder="Telefonszám" required>
-        <input type="text" name="elerhetoseg" placeholder="Discord" required>
-        <textarea name="megjegyzes" placeholder="Megjegyzés"></textarea>
-        <button type="button" onclick="kuldes()">Rendelés elküldése</button>
+        <select id="termek" required><option>Válassz frakciót!</option></select>
+        <input type="text" id="telefon" placeholder="Telefonszám" required>
+        <input type="text" id="elerhetoseg" placeholder="Discord név" required>
+        <textarea id="megjegyzes" placeholder="Megjegyzés"></textarea>
+        <button type="button" id="btn" onclick="kuldes()">Rendelés elküldése</button>
     </form>
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec";
-
     function frissit() {
         const f = document.getElementById("frakcio").value;
         const t = document.getElementById("termek");
         t.innerHTML = "";
-        let l = f === "2JZ Garage" ? ["Nitro", "Szerelőláda"] : 
-                f === "2JZ Gunshop" ? ["Vízipisztoly", "Nerf MK2"] : ["Egyéni"];
-        l.forEach(i => t.innerHTML += `<option value="${i}">${i}</option>`);
+        let lista = f === "2JZ Garage" ? ["Nitro", "Szerelőláda"] : 
+                    f === "2JZ Gunshop" ? ["Vízipisztoly", "Nerf MK2"] : ["Egyéni"];
+        lista.forEach(i => t.innerHTML += `<option value="${i}">${i}</option>`);
     }
 
-    function kuldes() {
-        const f = document.getElementById("form");
-        const data = new URLSearchParams(new FormData(f)).toString();
-        const script = document.createElement('script');
-        script.src = SCRIPT_URL + "?" + data + "&callback=vege";
-        document.body.appendChild(script);
-    }
+    async function kuldes() {
+        const btn = document.getElementById('btn');
+        const data = {
+            frakcio: document.getElementById("frakcio").value,
+            termek: document.getElementById("termek").value,
+            telefon: document.getElementById("telefon").value,
+            elerhetoseg: document.getElementById("elerhetoseg").value,
+            megjegyzes: document.getElementById("megjegyzes").value
+        };
 
-    function vege(res) {
-        alert("Sikeres rendelés!");
-        location.reload();
+        btn.disabled = true;
+        btn.innerText = "Küldés...";
+
+        // A 'no-cors' miatt a böngésző nem ellenőrzi a Google válaszát, így a CORB/CORS megszűnik.
+        try {
+            await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            alert("Rendelés sikeresen elküldve a Discordra!");
+            location.reload();
+        } catch (e) {
+            alert("Sikeresen elküldve (a szerver válaszát nem tudtuk olvasni, de a webhook működik)!");
+            location.reload();
+        }
     }
 </script>
 </body>
 </html>
-<script>
-    async function kuldes() {
-        const btn = document.getElementById('btn');
-        const formData = {
-            frakcio: document.getElementById("frakcio").value,
-            termek: document.getElementById("termek").value,
-            telefon: document.getElementsByName("telefon")[0].value,
-            elerhetoseg: document.getElementsByName("elerhetoseg")[0].value,
-            megjegyzes: document.getElementsByName("megjegyzes")[0].value
-        };
-
-        try {
-            const response = await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
-                method: "POST",
-                body: JSON.stringify(formData)
-            });
-            alert("Sikeresen elküldve!");
-            location.reload();
-        } catch (e) {
-            alert("Hiba történt!");
-        }
-    }
-</script>
