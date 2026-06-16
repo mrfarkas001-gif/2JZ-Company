@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <title>2JZ Company</title>
     <style>
-        /* CSS STÍLUSOK */
         body { background-color: #121212; color: #e0e0e0; font-family: sans-serif; margin: 0; text-align: center; }
-        .navbar { background-color: #000; padding: 20px; border-bottom: 2px solid #FFD700; }
-        .navbar ul { list-style: none; display: flex; justify-content: center; padding: 0; margin: 0; }
+        .navbar { background-color: #000; padding: 20px; border-bottom: 2px solid #FFD700; display: flex; justify-content: center; align-items: center; }
+        .navbar ul { list-style: none; display: flex; padding: 0; margin: 0; }
         .navbar li { margin: 0 20px; }
         .navbar a { color: white; text-decoration: none; font-weight: bold; }
         .navbar a:hover { color: #FFD700; }
+        /* Zene gomb stílusa */
+        #zeneGomb { background: #FFD700; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 20px; }
+        
         .content { padding: 20px; }
         .box { background-color: #1e1e1e; border: 2px solid #FFD700; border-radius: 15px; padding: 30px; max-width: 500px; margin: 20px auto; }
         input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #2c2c2c; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
         button { background-color: #d32f2f; color: white; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .oldal { display: none; }
+        #rolunk { display: block; } /* Alapértelmezett oldal */
     </style>
 </head>
 <body>
@@ -26,16 +30,24 @@
             <li><a href="#" onclick="mutat('rendeles')">Rendelés</a></li>
             <li><a href="#" onclick="mutat('jelentkezes')">Jelentkezés</a></li>
         </ul>
+        <button id="zeneGomb" onclick="zeneKapcsolo()">Zene: KI</button>
     </nav>
 
+    <audio id="zene" loop>
+        <source src="zene.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="content">
-        <img src="kingsman logo2.png" alt="Logo" style="width:200px; margin-top:20px;">
+        <img src="kingsman_logo2.png" alt="Logo" style="width:200px; margin-top:20px;">
 
-        <div id="rolunk" class="oldal"><h1>Rólunk</h1><p>Üdvözlünk a 2JZ Company oldalán!</p></div>
+        <div id="rolunk" class="oldal"><h1>Rólunk</h1><p>A 2JZ Company 2024-ben lett megalapítva. <p>
+        <p>Aktiv szerelőteleppel illetve Fegyverboltal rendelkezünk . Rendelést a "rendelés" fülön adhat le amit munkatársaink Pár nap alatt leszállítanak <p>
+            <p>Jelentkezni szeretne ? Erre is van megoldás a "jelentkezés" fülön. <p>
+    <p>Bármiféle Problémát Tapasztal az oldal mükődésével kérem Keresse Discordon :mr.wolf8015 felhasználót!
+        </p></div>
+        <div id="frakciok" class="oldal"><h1>Frakcióink</h1><p>2JZ Garage, 2JZ Gunshop, Kingsman.</p></div>
         
-        <div id="frakciok" class="oldal" style="display:none;"><h1>Frakcióink</h1><p>2JZ Garage, 2JZ Gunshop, Kingsman.</p></div>
-
-        <div id="rendeles" class="oldal" style="display:none;">
+        <div id="rendeles" class="oldal">
             <div class="box">
                 <h2>Rendelés</h2>
                 <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
@@ -48,7 +60,7 @@
             </div>
         </div>
 
-        <div id="jelentkezes" class="oldal" style="display:none;">
+        <div id="jelentkezes" class="oldal">
             <div class="box">
                 <h2>Jelentkezés</h2>
                 <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
@@ -64,6 +76,18 @@
         function mutat(id) {
             document.querySelectorAll('.oldal').forEach(o => o.style.display = 'none');
             document.getElementById(id).style.display = 'block';
+        }
+
+        function zeneKapcsolo() {
+            var audio = document.getElementById("zene");
+            var gomb = document.getElementById("zeneGomb");
+            if (audio.paused) {
+                audio.play();
+                gomb.innerHTML = "Zene: BE";
+            } else {
+                audio.pause();
+                gomb.innerHTML = "Zene: KI";
+            }
         }
     </script>
 </body>
