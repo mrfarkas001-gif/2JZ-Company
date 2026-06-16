@@ -14,7 +14,7 @@
 
 <div class="box">
     <h2>Rendelés</h2>
-    <form id="rendelesForm">
+    <form id="rendelesForm" target="hidden_iframe" onsubmit="submitted=true;">
         <select id="frakcio" name="frakcio" onchange="frissit()" required>
             <option value="">Frakció választás</option>
             <option value="2JZ Garage">2JZ Garage</option>
@@ -27,11 +27,13 @@
         <textarea name="megjegyzes" placeholder="Megjegyzés"></textarea>
         <button type="submit" id="btn">Küldés</button>
     </form>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { alert('Sikeres rendelés!'); location.reload(); }"></iframe>
 </div>
 
 <script>
-    const form = document.getElementById("rendelesForm");
+    var submitted = false;
     const url = "https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec";
+    document.getElementById("rendelesForm").action = url;
 
     function frissit() {
         const f = document.getElementById("frakcio").value;
@@ -41,22 +43,6 @@
                     f === "2JZ Gunshop" ? ["Vízipisztoly", "Nerf MK2"] : ["Egyéni"];
         lista.forEach(i => t.innerHTML += `<option value="${i}">${i}</option>`);
     }
-
-    form.addEventListener("submit", e => {
-        e.preventDefault();
-        document.getElementById("btn").disabled = true;
-        document.getElementById("btn").innerText = "Küldés...";
-        
-        fetch(url, {
-            method: "POST",
-            body: new FormData(form) // Ez a trükk: FormData küldése CORS nélkül
-        })
-        .then(() => {
-            alert("Sikeres rendelés!");
-            location.reload();
-        })
-        .catch(err => alert("Hiba: " + err));
-    });
 </script>
 </body>
 </html>
