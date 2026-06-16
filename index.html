@@ -2,82 +2,61 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2JZ Company</title>
     <style>
-        body { margin:0; background:#111; color:white; font-family:Arial,sans-serif; }
-        header { text-align:center; padding:30px; background:black; border-bottom:3px solid gold; }
-        h1 { color:gold; }
-        .order-box { max-width:700px; margin:40px auto; background:#1a1a1a; padding:25px; border-radius:10px; border:2px solid gold; }
-        input, select, textarea { width:100%; padding:12px; margin:5px 0 15px 0; border:none; border-radius:6px; box-sizing:border-box; }
-        button { background:red; color:white; border:none; padding:15px; width:100%; font-size:16px; border-radius:6px; cursor:pointer; }
-        #success { display:none; margin-top:20px; padding:15px; background:#145214; border-radius:6px; text-align:center; }
+        body { background:#111; color:white; font-family:sans-serif; text-align:center; padding:20px; }
+        .box { max-width:500px; margin:auto; background:#1a1a1a; padding:20px; border:2px solid gold; border-radius:10px; }
+        input, select, textarea { width:100%; padding:10px; margin:5px 0; border-radius:5px; border:none; box-sizing:border-box; }
+        button { background:red; color:white; padding:15px; width:100%; border:none; cursor:pointer; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>2JZ Company</h1>
-</header>
-
-<section class="order-box">
+<div class="box">
     <h2>Rendelés</h2>
-    <label>Frakció</label>
-    <select id="frakcio" onchange="termekekBetoltese()">
-        <option value="">Válassz</option>
-        <option value="2JZ Garage">2JZ Garage</option>
-        <option value="2JZ Gunshop">2JZ Gunshop</option>
-        <option value="Kingsman">Kingsman</option>
-    </select>
-    <label>Termék</label>
-    <select id="termek"><option>Először válassz frakciót</option></select>
-    <label>IC Telefonszám</label>
-    <input type="text" id="telefon">
-    <label>Elérhetőség</label>
-    <input type="text" id="elerhetoseg">
-    <label>Megjegyzés</label>
-    <textarea id="megjegyzes" rows="3"></textarea>
-    <button id="sendBtn" onclick="kuldes()">Rendelés elküldése</button>
-    <div id="success">A megrendelést rögzítettük.</div>
-</section>
+    <form id="rendelesForm">
+        <select id="frakcio" name="frakcio" onchange="frissit()" required>
+            <option value="">Frakció választás</option>
+            <option value="2JZ Garage">2JZ Garage</option>
+            <option value="2JZ Gunshop">2JZ Gunshop</option>
+            <option value="Kingsman">Kingsman</option>
+        </select>
+        <select id="termek" name="termek" required><option>Válassz frakciót!</option></select>
+        <input type="text" name="telefon" placeholder="Telefonszám" required>
+        <input type="text" name="elerhetoseg" placeholder="Discord név" required>
+        <textarea name="megjegyzes" placeholder="Megjegyzés"></textarea>
+        <button type="submit" id="btn">Küldés</button>
+    </form>
+</div>
 
 <script>
-    function termekekBetoltese() {
+    const form = document.getElementById("rendelesForm");
+    const url = "https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec";
+
+    function frissit() {
         const f = document.getElementById("frakcio").value;
         const t = document.getElementById("termek");
         t.innerHTML = "";
         let lista = f === "2JZ Garage" ? ["Nitro", "Szerelőláda"] : 
-                    f === "2JZ Gunshop" ? ["Vízipisztoly", "Nerf MK2", "Nerf HFAP", "Nerf Vector", "Nerf PSR"] : 
-                    f === "Kingsman" ? ["Egyéni megbízás"] : [];
-        lista.forEach(item => { let o = document.createElement("option"); o.text = item; t.add(o); });
+                    f === "2JZ Gunshop" ? ["Vízipisztoly", "Nerf MK2"] : ["Egyéni"];
+        lista.forEach(i => t.innerHTML += `<option value="${i}">${i}</option>`);
     }
 
-    async function kuldes() {
-        const btn = document.getElementById('sendBtn');
-        const adat = {
-            frakcio: document.getElementById("frakcio").value,
-            termek: document.getElementById("termek").value,
-            telefon: document.getElementById("telefon").value,
-            elerhetoseg: document.getElementById("elerhetoseg").value,
-            megjegyzes: document.getElementById("megjegyzes").value
-        };
-        if (!adat.frakcio) { alert("Válassz frakciót!"); return; }
-        btn.disabled = true;
-        btn.innerText = "Küldés...";
-        try {
-            await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(adat)
-            });
-            document.getElementById("success").style.display = "block";
-            btn.style.display = "none";
-        } catch (e) {
-            alert("Hiba történt!");
-            btn.disabled = false;
-            btn.innerText = "Rendelés elküldése";
-        }
-    }
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        document.getElementById("btn").disabled = true;
+        document.getElementById("btn").innerText = "Küldés...";
+        
+        fetch(url, {
+            method: "POST",
+            body: new FormData(form) // Ez a trükk: FormData küldése CORS nélkül
+        })
+        .then(() => {
+            alert("Sikeres rendelés!");
+            location.reload();
+        })
+        .catch(err => alert("Hiba: " + err));
+    });
 </script>
 </body>
 </html>
