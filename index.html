@@ -4,35 +4,28 @@
     <meta charset="UTF-8">
     <title>2JZ Company</title>
     <style>
-        body { 
-            /* A háttérkép beállítása */
-            background-image: url('kingsman logo.png');
-            background-size: 300px; /* A logó ismétlődik, kisebb méretben */
-            background-repeat: repeat; 
-            background-color: #0a0a0a; 
-            color: #e0e0e0; 
-            font-family: sans-serif; 
-            margin: 0; 
-            text-align: center; 
-        }
-        
+        body { background-image: url('kingsman_logo.png'); background-size: 300px; background-repeat: repeat; background-color: #0a0a0a; color: #e0e0e0; font-family: sans-serif; margin: 0; text-align: center; }
         .navbar { background-color: rgba(0, 0, 0, 0.9); padding: 20px; border-bottom: 2px solid #FFD700; display: flex; justify-content: center; align-items: center; }
         .navbar ul { list-style: none; display: flex; padding: 0; margin: 0; }
-        .navbar li { margin: 0 20px; }
+        .navbar li { margin: 0 15px; }
         .navbar a { color: white; text-decoration: none; font-weight: bold; }
         .navbar a:hover { color: #FFD700; }
-        
         #zeneGomb { background: #FFD700; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 20px; }
         
-        .content { padding: 20px; background: rgba(18, 18, 18, 0.85); min-height: 100vh; }
+        .content { padding: 20px; background: rgba(18, 18, 18, 0.85); min-height: 100vh; position: relative; }
         .top-logo { width: 350px; margin-top: 30px; }
         
-        .box { background-color: rgba(30, 30, 30, 0.9); border: 2px solid #FFD700; border-radius: 15px; padding: 30px; max-width: 500px; margin: 20px auto; }
+        .box { background-color: rgba(30, 30, 30, 0.9); border: 2px solid #FFD700; border-radius: 15px; padding: 20px; max-width: 500px; margin: 20px auto; text-align: left; }
         input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #2c2c2c; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
         button { background-color: #d32f2f; color: white; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
         
+        /* Kiemelések */
+        .discord-highlight { color: #4CAF50; font-weight: bold; font-size: 1.1em; }
+        .uzemelteto { position: fixed; bottom: 10px; left: 10px; color: #666; font-size: 12px; }
+        
         .oldal { display: none; }
         #rolunk { display: block; }
+        h3 { color: #FFD700; margin-top: 20px; border-bottom: 1px solid #444; padding-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -40,6 +33,7 @@
     <nav class="navbar">
         <ul>
             <li><a href="#" onclick="mutat('rolunk')">Rólunk</a></li>
+            <li><a href="#" onclick="mutat('kisokos')">Kisokos</a></li>
             <li><a href="#" onclick="mutat('frakciok')">Frakciók</a></li>
             <li><a href="#" onclick="mutat('rendeles')">Rendelés</a></li>
             <li><a href="#" onclick="mutat('jelentkezes')">Jelentkezés</a></li>
@@ -51,26 +45,45 @@
         <source src="nyers2.0.MP3" type="audio/mpeg">
     </audio>
 
+    <div class="uzemelteto">Üzemeltető: mr.wolf8015</div>
+
     <div class="content">
-        <img src="kingsman logo2.png" alt="Logo" class="top-logo">
+        <img src="kingsman_logo2.png" alt="Logo" class="top-logo">
 
         <div id="rolunk" class="oldal">
             <h1>Rólunk</h1>
             <p>A 2JZ Company 2024-ben lett megalapítva.</p>
-            <p>Aktív szerelőteleppel illetve fegyverbolttal rendelkezünk. Rendelést a "Rendelés" fülön adhat le, amit munkatársaink pár nap alatt leszállítanak.</p>
-            <p>Jelentkezni szeretne? Erre is van megoldás a "Jelentkezés" fülön.</p>
-            <p>Bármiféle problémát tapasztal az oldal működésével, kérem keresse Discordon: <b>mr.wolf8015</b> felhasználót!</p>
+            <p>Bármiféle problémát tapasztal az oldal működésével, kérem keresse Discordon: <span class="discord-highlight">mr.wolf8015</span> felhasználót!</p>
         </div>
 
-        <div id="frakciok" class="oldal">
-            <h1>Frakcióink</h1>
-            <p>2JZ Garage, 2JZ Gunshop, Kingsman.</p>
+        <div id="kisokos" class="oldal">
+            <div class="box">
+                <h2>Rendelési kisokos</h2>
+                <p>A rendelés teljesítésének érdekében megkérem, hogy a kellő adatokat megfelelően töltse ki!</p>
+                
+                <h3>2JZ Garage</h3>
+                <p>- Szerelőláda: 10.000 $</p>
+                <p>- Nitro: 12.500 $</p>
+                
+                <h3>2JZ Gunshop</h3>
+                <p>- Vizipisztoly</p>
+                <p>- MK2 Vizipisztoly</p>
+                <p>- HFAP "Nerf" fegyver</p>
+                <p>- Vector "Nerf" fegyver</p>
+                <p>- PSR "Nerf" fegyver</p>
+                
+                <h3>Kingsman</h3>
+                <p>- Elsőosztályú Kaviár: 8.500 $</p>
+                <p><b>Alvilági tevékenységek:</b> A ránk bízott feladat nehézségétől és a megbízó igényeitől függ.</p>
+            </div>
         </div>
+
+        <div id="frakciok" class="oldal"><h1>Frakcióink</h1><p>2JZ Garage, 2JZ Gunshop, Kingsman.</p></div>
         
         <div id="rendeles" class="oldal">
             <div class="box">
                 <h2>Rendelés</h2>
-                <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+                <form action="IDE_A_GOOGLE_SCRIPT_URL-ED" method="POST">
                     <select name="frakcio"><option>2JZ Garage</option><option>2JZ Gunshop</option><option>Kingsman</option></select>
                     <input name="telefon" placeholder="Telefonszám" required>
                     <input name="elerhetoseg" placeholder="Discord név" required>
@@ -83,7 +96,7 @@
         <div id="jelentkezes" class="oldal">
             <div class="box">
                 <h2>Jelentkezés</h2>
-                <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+                <form action="IDE_A_GOOGLE_SCRIPT_URL-ED" method="POST">
                     <select name="frakcio"><option>2JZ Garage</option><option>2JZ Gunshop</option><option>Kingsman</option></select>
                     <textarea name="megrendeles" placeholder="Írj magadról (IC/OOC)..." required></textarea>
                     <button type="submit">Jelentkezés küldése</button>
@@ -97,17 +110,11 @@
             document.querySelectorAll('.oldal').forEach(o => o.style.display = 'none');
             document.getElementById(id).style.display = 'block';
         }
-
         function zeneKapcsolo() {
             var audio = document.getElementById("zene");
             var gomb = document.getElementById("zeneGomb");
-            if (audio.paused) {
-                audio.play();
-                gomb.innerHTML = "Zene: BE";
-            } else {
-                audio.pause();
-                gomb.innerHTML = "Zene: KI";
-            }
+            if (audio.paused) { audio.play(); gomb.innerHTML = "Zene: BE"; } 
+            else { audio.pause(); gomb.innerHTML = "Zene: KI"; }
         }
     </script>
 </body>
