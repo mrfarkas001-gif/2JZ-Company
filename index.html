@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>2JZ Company</title>
 
 <style>
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
     background:#111;
     color:white;
+    font-family:Arial,sans-serif;
 }
 
 header{
-    background:black;
-    padding:20px;
     text-align:center;
+    padding:30px;
+    background:black;
     border-bottom:3px solid gold;
 }
 
@@ -26,15 +27,15 @@ header h1{
 }
 
 nav{
-    background:#1a1a1a;
     text-align:center;
     padding:15px;
+    background:#1a1a1a;
 }
 
 nav a{
     color:white;
-    text-decoration:none;
     margin:15px;
+    text-decoration:none;
     font-weight:bold;
 }
 
@@ -42,106 +43,155 @@ nav a:hover{
     color:red;
 }
 
+section{
+    padding:40px 20px;
+}
+
 .hero{
     text-align:center;
-    padding:80px 20px;
 }
 
 .hero h2{
     color:gold;
-    font-size:40px;
 }
 
-.hero p{
-    font-size:20px;
+.order-box{
+    max-width:700px;
+    margin:auto;
+    background:#1a1a1a;
+    padding:25px;
+    border-radius:10px;
+    border:2px solid gold;
 }
 
-.btn{
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:6px;
+}
+
+button{
     background:red;
     color:white;
-    padding:12px 25px;
     border:none;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
+    padding:12px 20px;
+    font-size:16px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-section{
-    padding:50px 20px;
+button:hover{
+    opacity:0.9;
 }
 
-.factions{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.card{
-    background:#1a1a1a;
-    padding:20px;
-    width:250px;
-    border:2px solid gold;
-    border-radius:10px;
-    text-align:center;
+#success{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    background:#145214;
+    border-radius:6px;
 }
 
 footer{
-    background:black;
+    margin-top:50px;
     text-align:center;
     padding:20px;
+    background:black;
     border-top:3px solid gold;
 }
 
 </style>
-
 </head>
+
 <body>
 
 <header>
-<img src="kingsman logo.png" alt="Kingsman Logo" style="width:300px; margin-bottom:20px;">
-    
-    <h1>2JZ Company</h1>
 
-    <p style="color:#d4af37; font-size:22px;">
-        Kingsman • 2JZ Garage • 2JZ Gunshop
-    </p>
+<img src="kingsman logo.png"
+style="width:220px; margin-bottom:10px;">
+
+<h1>2JZ Company</h1>
+
+<p style="color:gold;">
+Kingsman • 2JZ Garage • 2JZ Gunshop
+</p>
+
 </header>
 
 <nav>
-    <a href="#">Rólunk</a>
-    <a href="#">Frakcióink</a>
-    <a href="#">Rendelés</a>
-    <a href="#">Jelentkezés</a>
+<a href="#rendeles">Rendelés</a>
 </nav>
 
-<div class="hero">
-    <h2>Üdvözlünk a 2JZ Company oldalán!</h2>
-    <p>2JZ Garage • 2JZ Gunshop • Kingsman</p>
-    <a href="#" class="btn">Tudj meg többet</a>
-</div>
+<section class="hero">
 
-<section>
+<h2>Üdvözlünk a 2JZ Company oldalán</h2>
 
-<h2 style="text-align:center;color:gold;">
-Frakcióink
-</h2>
+<p>
+Add le rendelésed online és hamarosan felvesszük veled a kapcsolatot.
+</p>
 
-<div class="factions">
+</section>
 
-<div class="card">
-<h3>2JZ Garage</h3>
-<p>Járműjavítás és szerelés.</p>
-</div>
+<section id="rendeles">
 
-<div class="card">
-<h3>2JZ Gunshop</h3>
-<p>Fegyverkereskedelem RP környezetben.</p>
-</div>
+<div class="order-box">
 
-<div class="card">
-<h3>Kingsman</h3>
-<p>Speciális megbízások és kapcsolatok.</p>
+<h2>Rendelés</h2>
+
+<label>Frakció</label>
+
+<select id="frakcio" onchange="termekekBetoltese()">
+
+<option value="">Válassz</option>
+
+<option value="2JZ Garage">2JZ Garage</option>
+
+<option value="2JZ Gunshop">2JZ Gunshop</option>
+
+<option value="Kingsman">Kingsman</option>
+
+</select>
+
+<label>Termék / Szolgáltatás</label>
+
+<select id="termek">
+<option>Először válassz frakciót</option>
+</select>
+
+<label>IC Telefonszám</label>
+
+<input
+type="text"
+id="telefon"
+placeholder="555-1234">
+
+<label>Elérhetőség</label>
+
+<input
+type="text"
+id="elerhetoseg"
+placeholder="Discord vagy egyéb elérhetőség">
+
+<label>Megjegyzés</label>
+
+<textarea
+id="megjegyzes"
+rows="5"></textarea>
+
+<button onclick="kuldes()">
+Rendelés elküldése
+</button>
+
+<div id="success">
+
+A megrendelést rögzítettük.<br>
+Hamarosan felvesszük Önnel a kapcsolatot.
+
 </div>
 
 </div>
@@ -149,8 +199,102 @@ Frakcióink
 </section>
 
 <footer>
+
 © 2026 2JZ Company
+
 </footer>
+
+<script>
+
+function termekekBetoltese(){
+
+const frakcio =
+document.getElementById("frakcio").value;
+
+const termek =
+document.getElementById("termek");
+
+termek.innerHTML = "";
+
+let lista = [];
+
+if(frakcio==="2JZ Garage"){
+
+lista = [
+"Nitro",
+"Szerelőláda"
+];
+
+}
+
+if(frakcio==="2JZ Gunshop"){
+
+lista = [
+"Vízipisztoly",
+"Nerf MK2",
+"Nerf HFAP",
+"Nerf Vector",
+"Nerf PSR"
+];
+
+}
+
+if(frakcio==="Kingsman"){
+
+lista = [
+"Egyéni megbízás"
+];
+
+}
+
+lista.forEach(item => {
+
+let op =
+document.createElement("option");
+
+op.text = item;
+
+termek.add(op);
+
+});
+
+}
+
+async function kuldes(){
+
+const adat = {
+
+frakcio:
+document.getElementById("frakcio").value,
+
+termek:
+document.getElementById("termek").value,
+
+telefon:
+document.getElementById("telefon").value,
+
+elerhetoseg:
+document.getElementById("elerhetoseg").value,
+
+megjegyzes:
+document.getElementById("megjegyzes").value
+
+};
+
+await fetch(
+"https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec",
+{
+method:"POST",
+body:JSON.stringify(adat)
+}
+);
+
+document.getElementById("success")
+.style.display="block";
+
+}
+
+</script>
 
 </body>
 </html>
