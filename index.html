@@ -10,15 +10,14 @@
         .navbar li { margin: 0 20px; }
         .navbar a { color: white; text-decoration: none; font-weight: bold; }
         .navbar a:hover { color: #FFD700; }
-        /* Zene gomb stílusa */
-        #zeneGomb { background: #FFD700; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 20px; }
-        
+        #zeneGomb { background: #FFD700; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 20px; }
         .content { padding: 20px; }
+        .logo { width: 350px; margin-top: 20px; }
         .box { background-color: #1e1e1e; border: 2px solid #FFD700; border-radius: 15px; padding: 30px; max-width: 500px; margin: 20px auto; }
         input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #2c2c2c; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
         button { background-color: #d32f2f; color: white; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
         .oldal { display: none; }
-        #rolunk { display: block; } /* Alapértelmezett oldal */
+        #rolunk { display: block; }
     </style>
 </head>
 <body>
@@ -34,19 +33,24 @@
     </nav>
 
     <audio id="zene" loop>
-        <source src="zene.mp3" type="audio/mpeg">
+        <source src="nyers2.0.MP3" type="audio/mpeg">
     </audio>
 
     <div class="content">
-        <img src="kingsman_logo2.png" alt="Logo" style="width:200px; margin-top:20px;">
+        <img src="kingsman_logo2.png" alt="Logo" class="logo">
 
-        <div id="rolunk" class="oldal"> <h1>Rólunk</h1>
-    <p>A 2JZ Company 2024-ben lett megalapítva.</p>
-    <p>Aktív szerelőteleppel illetve fegyverbolttal rendelkezünk. Rendelést a "Rendelés" fülön adhat le, amit munkatársaink pár nap alatt leszállítanak.</p>
-    <p>Jelentkezni szeretne? Erre is van megoldás a "Jelentkezés" fülön.</p>
-    <p>Bármiféle problémát tapasztal az oldal működésével, kérem keresse Discordon: <b>mr.wolf8015</b> felhasználót!</p>
-        </p></div>
-        <div id="frakciok" class="oldal"><h1>Frakcióink</h1><p>2JZ Garage, 2JZ Gunshop, Kingsman.</p></div>
+        <div id="rolunk" class="oldal">
+            <h1>Rólunk</h1>
+            <p>A 2JZ Company 2024-ben lett megalapítva.</p>
+            <p>Aktív szerelőteleppel illetve fegyverbolttal rendelkezünk. Rendelést a "Rendelés" fülön adhat le, amit munkatársaink pár nap alatt leszállítanak.</p>
+            <p>Jelentkezni szeretne? Erre is van megoldás a "Jelentkezés" fülön.</p>
+            <p>Bármiféle problémát tapasztal az oldal működésével, kérem keresse Discordon: <b>mr.wolf8015</b> felhasználót!</p>
+        </div>
+
+        <div id="frakciok" class="oldal">
+            <h1>Frakcióink</h1>
+            <p>2JZ Garage, 2JZ Gunshop, Kingsman.</p>
+        </div>
         
         <div id="rendeles" class="oldal">
             <div class="box">
