@@ -44,6 +44,28 @@
         lista.forEach(i => { let o = document.createElement("option"); o.value = i; o.text = i; t.add(o); });
     }
 </script>
+<script>
+    async function kuldes() {
+        const data = {
+            frakcio: document.getElementById("frakcio").value,
+            termek: document.getElementById("termek").value,
+            telefon: document.getElementsByName("telefon")[0].value,
+            elerhetoseg: document.getElementsByName("elerhetoseg")[0].value,
+            megjegyzes: document.getElementsByName("megjegyzes")[0].value
+        };
 
+        try {
+            await fetch("IDE_A_TE_WEB_APP_URL-ED", {
+                method: "POST",
+                // A CORS miatt itt nem állítunk be contentType-ot, 
+                // de a szerveroldal most már mindent kezel.
+                body: JSON.stringify(data)
+            });
+            alert("Sikeres rendelés!");
+        } catch (e) {
+            alert("Hiba: " + e);
+        }
+    }
+</script>
 </body>
 </html>
