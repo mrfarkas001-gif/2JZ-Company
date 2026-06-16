@@ -25,7 +25,6 @@
 <body>
 
 <header>
-    <img src="kingsman logo.png" style="width:220px; margin-bottom:10px;">
     <h1>2JZ Company</h1>
     <p style="color:gold;">Kingsman • 2JZ Garage • 2JZ Gunshop</p>
 </header>
@@ -33,11 +32,6 @@
 <nav>
     <a href="#rendeles">Rendelés</a>
 </nav>
-
-<section class="hero">
-    <h2>Üdvözlünk a 2JZ Company oldalán</h2>
-    <p>Add le rendelésed online és hamarosan felvesszük veled a kapcsolatot.</p>
-</section>
 
 <section id="rendeles">
     <div class="order-box">
@@ -51,31 +45,21 @@
         </select>
 
         <label>Termék / Szolgáltatás</label>
-        <select id="termek">
-            <option>Először válassz frakciót</option>
-        </select>
+        <select id="termek"><option>Először válassz frakciót</option></select>
 
         <label>IC Telefonszám</label>
         <input type="text" id="telefon" placeholder="555-1234">
 
         <label>Elérhetőség</label>
-        <input type="text" id="elerhetoseg" placeholder="Discord vagy egyéb elérhetőség">
+        <input type="text" id="elerhetoseg" placeholder="Discord név">
 
         <label>Megjegyzés</label>
         <textarea id="megjegyzes" rows="5"></textarea>
 
-        <button onclick="kuldes()">Rendelés elküldése</button>
-
-        <div id="success">
-            A megrendelést rögzítettük.<br>
-            Hamarosan felvesszük Önnel a kapcsolatot.
-        </div>
+        <button id="sendBtn" onclick="kuldes()">Rendelés elküldése</button>
+        <div id="success">A megrendelést rögzítettük. Hamarosan felvesszük Önnel a kapcsolatot.</div>
     </div>
 </section>
-
-<footer>
-    © 2026 2JZ Company
-</footer>
 
 <script>
     function termekekBetoltese() {
@@ -83,22 +67,14 @@
         const termek = document.getElementById("termek");
         termek.innerHTML = "";
         let lista = [];
-
         if(frakcio === "2JZ Garage") lista = ["Nitro", "Szerelőláda"];
         else if(frakcio === "2JZ Gunshop") lista = ["Vízipisztoly", "Nerf MK2", "Nerf HFAP", "Nerf Vector", "Nerf PSR"];
         else if(frakcio === "Kingsman") lista = ["Egyéni megbízás"];
-
-        lista.forEach(item => {
-            let op = document.createElement("option");
-            op.text = item;
-            termek.add(op);
-        });
+        lista.forEach(item => { let op = document.createElement("option"); op.text = item; termek.add(op); });
     }
 
     async function kuldes() {
-        const btn = document.querySelector('button');
-        const successDiv = document.getElementById("success");
-        
+        const btn = document.getElementById('sendBtn');
         const adat = {
             frakcio: document.getElementById("frakcio").value,
             termek: document.getElementById("termek").value,
@@ -107,10 +83,7 @@
             megjegyzes: document.getElementById("megjegyzes").value
         };
 
-        if (!adat.frakcio) {
-            alert("Kérlek válassz frakciót!");
-            return;
-        }
+        if (!adat.frakcio) { alert("Kérlek válassz frakciót!"); return; }
 
         btn.disabled = true;
         btn.innerText = "Küldés folyamatban...";
@@ -118,19 +91,17 @@
         try {
             await fetch("https://script.google.com/macros/s/AKfycbwkioOffuhWeCMi7ZIpLbx_fizCQt3XGVQIgoiD2CS1ebJRHC7YLNjCkNzcF837B_js/exec", {
                 method: "POST",
-                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(adat)
             });
-
-            successDiv.style.display = "block";
+            document.getElementById("success").style.display = "block";
             btn.style.display = "none";
         } catch (error) {
-            alert("Hiba történt a küldés során, próbáld újra!");
+            alert("Hiba történt a küldés során!");
             btn.disabled = false;
             btn.innerText = "Rendelés elküldése";
         }
     }
 </script>
-
 </body>
 </html>
