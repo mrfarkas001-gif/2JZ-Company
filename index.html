@@ -1,20 +1,70 @@
-<form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
-    
-    <label>Frakció:</label>
-    <select name="frakcio" required>
-        <option value="2JZ Garage">2JZ Garage</option>
-        <option value="2JZ Gunshop">2JZ Gunshop</option>
-        <option value="Kingsman">Kingsman</option>
-    </select>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>2JZ Company</title>
+    <style>
+        /* CSS STÍLUSOK */
+        body { background-color: #121212; color: #e0e0e0; font-family: sans-serif; margin: 0; text-align: center; }
+        .navbar { background-color: #000; padding: 20px; border-bottom: 2px solid #FFD700; }
+        .navbar ul { list-style: none; display: flex; justify-content: center; padding: 0; margin: 0; }
+        .navbar li { margin: 0 20px; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; }
+        .navbar a:hover { color: #FFD700; }
+        .content { padding: 20px; }
+        .box { background-color: #1e1e1e; border: 2px solid #FFD700; border-radius: 15px; padding: 30px; max-width: 500px; margin: 20px auto; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #2c2c2c; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
+        button { background-color: #d32f2f; color: white; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
 
-    <label>Telefonszám:</label>
-    <input type="text" name="telefon" required>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#" onclick="mutat('rolunk')">Rólunk</a></li>
+            <li><a href="#" onclick="mutat('frakciok')">Frakciók</a></li>
+            <li><a href="#" onclick="mutat('rendeles')">Rendelés</a></li>
+            <li><a href="#" onclick="mutat('jelentkezes')">Jelentkezés</a></li>
+        </ul>
+    </nav>
 
-    <label>Discord név:</label>
-    <input type="text" name="elerhetoseg" required>
+    <div class="content">
+        <img src="kingsman logo2.png" alt="Logo" style="width:200px; margin-top:20px;">
 
-    <label>Megrendelés részletei:</label>
-    <textarea name="megrendeles" required></textarea>
+        <div id="rolunk" class="oldal"><h1>Rólunk</h1><p>Üdvözlünk a 2JZ Company oldalán!</p></div>
+        
+        <div id="frakciok" class="oldal" style="display:none;"><h1>Frakcióink</h1><p>2JZ Garage, 2JZ Gunshop, Kingsman.</p></div>
 
-    <button type="submit">Küldés a 2JZ-nek</button>
-</form>
+        <div id="rendeles" class="oldal" style="display:none;">
+            <div class="box">
+                <h2>Rendelés</h2>
+                <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+                    <select name="frakcio"><option>2JZ Garage</option><option>2JZ Gunshop</option><option>Kingsman</option></select>
+                    <input name="telefon" placeholder="Telefonszám" required>
+                    <input name="elerhetoseg" placeholder="Discord név" required>
+                    <textarea name="megrendeles" placeholder="Megrendelés részletei" required></textarea>
+                    <button type="submit">Küldés a Discordra</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="jelentkezes" class="oldal" style="display:none;">
+            <div class="box">
+                <h2>Jelentkezés</h2>
+                <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+                    <select name="frakcio"><option>2JZ Garage</option><option>2JZ Gunshop</option><option>Kingsman</option></select>
+                    <textarea name="megrendeles" placeholder="Írj magadról (IC/OOC)..." required></textarea>
+                    <button type="submit">Jelentkezés küldése</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mutat(id) {
+            document.querySelectorAll('.oldal').forEach(o => o.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
