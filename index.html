@@ -20,8 +20,9 @@
         button { background-color: #d32f2f; color: white; padding: 15px; width: 100%; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
         
         /* Kiemelések */
-        .discord-highlight { color: #4CAF50; font-weight: bold; font-size: 1.1em; }
-        .uzemelteto { position: fixed; bottom: 10px; left: 10px; color: #666; font-size: 12px; }
+        .discord-highlight { color: #4CAF50; font-weight: bold; }
+        .uzemelteto-footer { margin-top: 50px; padding: 20px; border-top: 1px solid #333; color: #888; font-size: 14px; }
+        .uzemelteto-footer span { color: #FFD700; font-weight: bold; }
         
         .oldal { display: none; }
         #rolunk { display: block; }
@@ -45,15 +46,18 @@
         <source src="nyers2.0.MP3" type="audio/mpeg">
     </audio>
 
-    <div class="uzemelteto">Üzemeltető: mr.wolf8015</div>
-
     <div class="content">
         <img src="kingsman logo2.png" alt="Logo" class="top-logo">
 
         <div id="rolunk" class="oldal">
             <h1>Rólunk</h1>
             <p>A 2JZ Company 2024-ben lett megalapítva.</p>
+            <p>Aktív társaság,precíz szakemberek.</p>
             <p>Bármiféle problémát tapasztal az oldal működésével, kérem keresse Discordon: <span class="discord-highlight">mr.wolf8015</span> felhasználót!</p>
+            
+            <div class="uzemelteto-footer">
+                Weboldal Üzemeltetője: <span>mr.wolf8015</span>
+            </div>
         </div>
 
         <div id="kisokos" class="oldal">
@@ -62,18 +66,16 @@
                 <p>A rendelés teljesítésének érdekében megkérem, hogy a kellő adatokat megfelelően töltse ki!</p>
                 
                 <h3>2JZ Garage</h3>
-                <p>- Szerelőláda: 10.000 $</p>
-                <p>- Nitro: 12.500 $</p>
+                <p>- Szerelőláda: 20.000 $</p>
+                <p>- Nitro: 15.000 $</p>
                 
                 <h3>2JZ Gunshop</h3>
-                <p>- Vizipisztoly</p>
-                <p>- MK2 Vizipisztoly</p>
-                <p>- HFAP "Nerf" fegyver</p>
-                <p>- Vector "Nerf" fegyver</p>
-                <p>- PSR "Nerf" fegyver</p>
+                <p>- Vizipisztoly, MK2 Vizipisztoly, HFAP "Nerf", Vector "Nerf", PSR "Nerf"</p>
+                <p><i>(Tájékoztatjuk ügyfeleinket, hogy rendvédelmi eszközök esetén a sorozatszám-eltérések miatt a hatósági regisztrációban nem tudunk segítséget nyújtani, azonban cserébe kedvezőbb árakkal és rugalmas elszámolási lehetőségekkel várjuk önöket.)</i></p>
                 
                 <h3>Kingsman</h3>
                 <p>- Elsőosztályú Kaviár: 8.500 $</p>
+                <p>- Ruha mosás: 95% hatékonysággal</p>
                 <p><b>Alvilági tevékenységek:</b> A ránk bízott feladat nehézségétől és a megbízó igényeitől függ.</p>
             </div>
         </div>
@@ -83,7 +85,7 @@
         <div id="rendeles" class="oldal">
             <div class="box">
                 <h2>Rendelés</h2>
-                <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+                <form action="https://script.google.com/macros/s/AKfycbxwD4618gdEkjbqN4NHrqp0ClbIijUppS8fSy8hggupNORU-s1u-qZ3ml1i5XT5JoG7/exec" method="POST">
                     <select name="frakcio"><option>2JZ Garage</option><option>2JZ Gunshop</option><option>Kingsman</option></select>
                     <input name="telefon" placeholder="Telefonszám" required>
                     <input name="elerhetoseg" placeholder="Discord név" required>
@@ -96,7 +98,7 @@
         <div id="jelentkezes" class="oldal">
             <div class="box">
                 <h2>Jelentkezés</h2>
-                <form action="https://script.google.com/macros/s/AKfycbwtCpnhO27B8jJe4lpy7AcxN5zPU-YCD-Arod0CD_nt6__aaNseCIKRknhhiKnaFUIZ/exec" method="POST">
+                <form action="https://script.google.com/macros/s/AKfycbxwD4618gdEkjbqN4NHrqp0ClbIijUppS8fSy8hggupNORU-s1u-qZ3ml1i5XT5JoG7/exec" method="POST">
                     <select name="frakcio"><option>2JZ Garage</option><option>2JZ Gunshop</option><option>Kingsman</option></select>
                     <textarea name="megrendeles" placeholder="Írj magadról (IC/OOC)..." required></textarea>
                     <button type="submit">Jelentkezés küldése</button>
